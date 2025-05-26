@@ -23,21 +23,12 @@ pipeline {
                     }
 
         }
-       // stage('Deploy to EC2') {
-       //      steps {
-       //          withCredentials([sshUserPrivateKey(credentialsId: 'agent1', keyFileVariable: 'KEY')]) {
-       //              sh '''
-       //                  scp  -i $KEY target/*.jar ec2-13-204-45-103.ap-south-1.compute.amazonaws.com:/home/ec2-user/
-       //              '''
-       //          }
-       //      }
-       //  }
-        stage('Restart server') {
+       stage('Deploy to EC2') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'agent1', keyFileVariable: 'KEY')]) {
-                    sh """
-                        ssh -i $KEY 'sudo reboot'
-                    """
+                    sh '''
+                        scp  -i $KEY target/*.jar ec2-13-204-45-103.ap-south-1.compute.amazonaws.com:/home/ec2-user/
+                    '''
                 }
             }
         }
