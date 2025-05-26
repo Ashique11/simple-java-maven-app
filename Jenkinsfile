@@ -32,5 +32,15 @@ pipeline {
                 }
             }
         }
+        stage('Restart server') {
+            steps {
+                withCredentials([sshUserPrivateKey(credentialsId: 'agent1', keyFileVariable: 'KEY')]) {
+                    sh """
+                        ssh -o StrictHostKeyChecking=no $REMOTE_HOST 'sudo reboot'
+                    """
+                }
+            }
+        }
+        
     }
 }
