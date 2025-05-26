@@ -23,15 +23,15 @@ pipeline {
                     }
 
         }
-       stage('Deploy to EC2') {
-            steps {
-                withCredentials([sshUserPrivateKey(credentialsId: 'agent1', keyFileVariable: 'KEY')]) {
-                    sh '''
-                        scp  -i $KEY target/*.jar ec2-13-204-45-103.ap-south-1.compute.amazonaws.com:/home/ec2-user/
-                    '''
-                }
-            }
-        }
+       // stage('Deploy to EC2') {
+       //      steps {
+       //          withCredentials([sshUserPrivateKey(credentialsId: 'agent1', keyFileVariable: 'KEY')]) {
+       //              sh '''
+       //                  scp  -i $KEY target/*.jar ec2-13-204-45-103.ap-south-1.compute.amazonaws.com:/home/ec2-user/
+       //              '''
+       //          }
+       //      }
+       //  }
         stage('Restart server') {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'agent1', keyFileVariable: 'KEY')]) {
