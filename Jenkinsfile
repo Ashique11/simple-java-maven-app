@@ -36,7 +36,7 @@ pipeline {
             steps {
                 withCredentials([sshUserPrivateKey(credentialsId: 'agent1', keyFileVariable: 'KEY')]) {
                     sh """
-                        ssh $REMOTE_HOST 'sudo reboot'
+                        ssh -i $KEY 'sudo reboot'
                     """
                 }
             }
